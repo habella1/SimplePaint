@@ -39,12 +39,12 @@
             trbLineWidth = new TrackBar();
             btnOpenFile = new Button();
             btnSaveFile = new Button();
-            picCanvas = new PictureBox();
+            PicCanvas = new PictureBox();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)trbLineWidth).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)picCanvas).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)PicCanvas).BeginInit();
             SuspendLayout();
             // 
             // lblAppName
@@ -168,21 +168,21 @@
             btnSaveFile.Text = "저장";
             btnSaveFile.UseVisualStyleBackColor = false;
             // 
-            // picCanvas
+            // PicCanvas
             // 
-            picCanvas.BackColor = SystemColors.ButtonHighlight;
-            picCanvas.Location = new Point(20, 286);
-            picCanvas.Name = "picCanvas";
-            picCanvas.Size = new Size(1056, 491);
-            picCanvas.TabIndex = 5;
-            picCanvas.TabStop = false;
+            PicCanvas.BackColor = SystemColors.ButtonHighlight;
+            PicCanvas.Location = new Point(20, 286);
+            PicCanvas.Name = "PicCanvas";
+            PicCanvas.Size = new Size(1056, 491);
+            PicCanvas.TabIndex = 5;
+            PicCanvas.TabStop = false;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(14F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1088, 789);
-            Controls.Add(picCanvas);
+            Controls.Add(PicCanvas);
             Controls.Add(btnSaveFile);
             Controls.Add(btnOpenFile);
             Controls.Add(groupBox2);
@@ -196,7 +196,7 @@
             groupBox3.ResumeLayout(false);
             groupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)trbLineWidth).EndInit();
-            ((System.ComponentModel.ISupportInitialize)picCanvas).EndInit();
+            ((System.ComponentModel.ISupportInitialize)PicCanvas).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -214,6 +214,6 @@
         private ComboBox cmbColor;
         private TrackBar trbLineWidth;
         private Button btnSaveFile;
-        private PictureBox picCanvas;
+        private PictureBox PicCanvas;
     }
 }
