@@ -39,10 +39,12 @@
             trbLineWidth = new TrackBar();
             btnOpenFile = new Button();
             btnSaveFile = new Button();
+            picCanvas = new PictureBox();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)trbLineWidth).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)picCanvas).BeginInit();
             SuspendLayout();
             // 
             // lblAppName
@@ -71,6 +73,7 @@
             // 
             // btnCircle
             // 
+            btnCircle.Font = new Font("한컴 소망 B", 7.874999F, FontStyle.Regular, GraphicsUnit.Point, 129);
             btnCircle.Image = Properties.Resources.KakaoTalk_20260430_100205471_032;
             btnCircle.ImageAlign = ContentAlignment.TopCenter;
             btnCircle.Location = new Point(206, 36);
@@ -83,7 +86,7 @@
             // 
             // btnRectangle
             // 
-            btnRectangle.Font = new Font("맑은 고딕", 7.875F, FontStyle.Regular, GraphicsUnit.Point, 129);
+            btnRectangle.Font = new Font("한컴 소망 B", 7.874999F, FontStyle.Regular, GraphicsUnit.Point, 129);
             btnRectangle.Image = Properties.Resources.KakaoTalk_20260430_100205471_031;
             btnRectangle.ImageAlign = ContentAlignment.TopCenter;
             btnRectangle.Location = new Point(107, 36);
@@ -96,6 +99,7 @@
             // 
             // btnLine
             // 
+            btnLine.Font = new Font("한컴 소망 B", 7.874999F, FontStyle.Regular, GraphicsUnit.Point, 129);
             btnLine.Image = Properties.Resources.KakaoTalk_20260430_100205471_03;
             btnLine.ImageAlign = ContentAlignment.TopCenter;
             btnLine.Location = new Point(8, 36);
@@ -144,27 +148,41 @@
             // 
             // btnOpenFile
             // 
+            btnOpenFile.BackColor = Color.FromArgb(255, 255, 192);
+            btnOpenFile.Font = new Font("한컴 백제 B", 10.875F, FontStyle.Regular, GraphicsUnit.Point, 129);
             btnOpenFile.Location = new Point(790, 180);
             btnOpenFile.Name = "btnOpenFile";
             btnOpenFile.Size = new Size(137, 81);
             btnOpenFile.TabIndex = 3;
             btnOpenFile.Text = "열기";
-            btnOpenFile.UseVisualStyleBackColor = true;
+            btnOpenFile.UseVisualStyleBackColor = false;
             // 
             // btnSaveFile
             // 
+            btnSaveFile.BackColor = Color.FromArgb(192, 255, 255);
+            btnSaveFile.Font = new Font("한컴 백제 B", 10.1249981F, FontStyle.Regular, GraphicsUnit.Point, 129);
             btnSaveFile.Location = new Point(939, 180);
             btnSaveFile.Name = "btnSaveFile";
             btnSaveFile.Size = new Size(137, 81);
             btnSaveFile.TabIndex = 4;
             btnSaveFile.Text = "저장";
-            btnSaveFile.UseVisualStyleBackColor = true;
+            btnSaveFile.UseVisualStyleBackColor = false;
+            // 
+            // picCanvas
+            // 
+            picCanvas.BackColor = SystemColors.ButtonHighlight;
+            picCanvas.Location = new Point(20, 286);
+            picCanvas.Name = "picCanvas";
+            picCanvas.Size = new Size(1056, 491);
+            picCanvas.TabIndex = 5;
+            picCanvas.TabStop = false;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(14F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1088, 789);
+            Controls.Add(picCanvas);
             Controls.Add(btnSaveFile);
             Controls.Add(btnOpenFile);
             Controls.Add(groupBox2);
@@ -178,6 +196,7 @@
             groupBox3.ResumeLayout(false);
             groupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)trbLineWidth).EndInit();
+            ((System.ComponentModel.ISupportInitialize)picCanvas).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -195,5 +214,6 @@
         private ComboBox cmbColor;
         private TrackBar trbLineWidth;
         private Button btnSaveFile;
+        private PictureBox picCanvas;
     }
 }
