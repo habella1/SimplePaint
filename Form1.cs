@@ -14,21 +14,29 @@ namespace SimplePaint
         private Graphics canvasGraphics; // 비트맵 위에 그리기 위한객체
 
         private bool isDrawing = false; // 현재 드래그 중인지 여부
+       
         private Point startPoint; // 드래그 시작점
         private Point endPoint; // 드래그 끝점
 
         private ToolType currentTool = ToolType.Line; // 현재 선택된 도형
         private Color currentColor = Color.Black; // 현재 색상
         private int currentLineWidth = 2; // 현재 선 두께
+        private float zoom = 1.0f;
 
         public Form1()
         {
             InitializeComponent();
             this.DoubleBuffered = true;
 
-            this.DoubleBuffered = true;
+            this.MouseWheel += Form1_MouseWheel;
+            this.KeyPreview = true;
 
-            // ⭐ 여기 추가 (PictureBox 부드럽게)
+            this.MouseWheel += Form1_MouseWheel;
+            this.Focus();
+
+
+
+            // (PictureBox 부드럽게)
             typeof(PictureBox).GetProperty("DoubleBuffered", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance).SetValue(PicCanvas, true, null);
 
             // 캔버스 초기화
@@ -94,13 +102,32 @@ namespace SimplePaint
         // 마우스가 드래그 되는 중에 도형의 미리보기를 화면에 점선으로 보여주기
         private void PicCanvas_Paint(object sender, PaintEventArgs e)
         {
-            if (!isDrawing) return;
+            if (canvasBitmap == null) return;
 
-            // 점선 펜 (미리보기용)
-            using (Pen previewPen = new Pen(currentColor, currentLineWidth))
+            e.Graphics.Clear(Color.White);
+
+            // 🔥 고품질 확대
+            e.Graphics.InterpolationMode =
+                System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+
+            // 🔥 zoom 중심으로 이미지 즉시 재그리기
+            e.Graphics.DrawImage(
+                canvasBitmap,
+                new Rectangle(
+                    0, 0,
+                    (int)(canvasBitmap.Width * zoom),
+                    (int)(canvasBitmap.Height * zoom)
+                )
+            );
+
+            // 드래그 미리보기 유지
+            if (isDrawing)
             {
-                previewPen.DashStyle = DashStyle.Dash;
-                DrawShape(e.Graphics, previewPen, startPoint, endPoint);
+                using (Pen p = new Pen(currentColor, currentLineWidth))
+                {
+                    p.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
+                    DrawShape(e.Graphics, p, startPoint, endPoint);
+                }
             }
 
         }
@@ -195,9 +222,6 @@ namespace SimplePaint
             }
         }
 
-        // 과제3 : 이미지 저장하기
-        
-
 
         private void lblAppName_Click(object sender, EventArgs e)
         {
@@ -232,5 +256,53 @@ namespace SimplePaint
                 lblStatus.Text = "✔ 저장 완료!";
             }
         }
+
+        //과제 4 : 외부 이미지 불러오기
+        private void btnOpenFile_Click_1(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "이미지 파일 (*.png;*.jpg;*.bmp)|*.png;*.jpg;*.bmp";
+
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                // 1️. 이미지 로드
+                canvasBitmap = new Bitmap(ofd.FileName);
+
+                // 2️. Graphics 다시 연결 (핵심)
+                canvasGraphics = Graphics.FromImage(canvasBitmap);
+                canvasGraphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+
+                // 3️. 캔버스에 표시
+                PicCanvas.Image = canvasBitmap;
+
+                
+            }
+        }
+
+        // 과제4 : 마우스 휠로 확대/축소
+        private void Form1_MouseWheel(object sender, MouseEventArgs e)
+        {
+            if (canvasBitmap == null) return;
+
+            // 🔥 더 부드럽게 변화 (중요)
+            float oldZoom = zoom;
+
+            if (e.Delta > 0)
+                zoom *= 1.1f;   // 확대
+            else
+                zoom /= 1.1f;   // 축소
+
+            // 최소/최대 제한
+            if (zoom < 0.2f) zoom = 0.2f;
+            if (zoom > 5.0f) zoom = 5.0f;
+
+            // 🔥 화면 즉시 갱신
+            PicCanvas.Invalidate();
+        }
+
+
+
+
+
     }
 }

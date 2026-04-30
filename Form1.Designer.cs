@@ -39,13 +39,15 @@
             trbLineWidth = new TrackBar();
             btnOpenFile = new Button();
             btnSaveFile = new Button();
-            PicCanvas = new PictureBox();
             lblStatus = new Label();
+            PicCanvas = new PictureBox();
+            panel1 = new Panel();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)trbLineWidth).BeginInit();
             ((System.ComponentModel.ISupportInitialize)PicCanvas).BeginInit();
+            panel1.SuspendLayout();
             SuspendLayout();
             // 
             // lblAppName
@@ -157,6 +159,7 @@
             btnOpenFile.TabIndex = 3;
             btnOpenFile.Text = "열기";
             btnOpenFile.UseVisualStyleBackColor = false;
+            btnOpenFile.Click += btnOpenFile_Click_1;
             // 
             // btnSaveFile
             // 
@@ -170,15 +173,6 @@
             btnSaveFile.UseVisualStyleBackColor = false;
             btnSaveFile.Click += btnSaveFile_Click_1;
             // 
-            // PicCanvas
-            // 
-            PicCanvas.BackColor = SystemColors.ButtonHighlight;
-            PicCanvas.Location = new Point(20, 286);
-            PicCanvas.Name = "PicCanvas";
-            PicCanvas.Size = new Size(1056, 491);
-            PicCanvas.TabIndex = 5;
-            PicCanvas.TabStop = false;
-            // 
             // lblStatus
             // 
             lblStatus.Font = new Font("한컴 백제 M", 10.8749981F, FontStyle.Bold, GraphicsUnit.Point, 129);
@@ -188,13 +182,31 @@
             lblStatus.Size = new Size(196, 42);
             lblStatus.TabIndex = 6;
             // 
+            // PicCanvas
+            // 
+            PicCanvas.BackColor = SystemColors.ButtonHighlight;
+            PicCanvas.Location = new Point(3, 17);
+            PicCanvas.Name = "PicCanvas";
+            PicCanvas.Size = new Size(1056, 491);
+            PicCanvas.TabIndex = 5;
+            PicCanvas.TabStop = false;
+            // 
+            // panel1
+            // 
+            panel1.AutoScroll = true;
+            panel1.Controls.Add(PicCanvas);
+            panel1.Location = new Point(20, 272);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(1056, 511);
+            panel1.TabIndex = 7;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(14F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1088, 789);
+            Controls.Add(panel1);
             Controls.Add(lblStatus);
-            Controls.Add(PicCanvas);
             Controls.Add(btnSaveFile);
             Controls.Add(btnOpenFile);
             Controls.Add(groupBox2);
@@ -209,6 +221,7 @@
             groupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)trbLineWidth).EndInit();
             ((System.ComponentModel.ISupportInitialize)PicCanvas).EndInit();
+            panel1.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -226,7 +239,8 @@
         private ComboBox cmbColor;
         private TrackBar trbLineWidth;
         private Button btnSaveFile;
-        private PictureBox PicCanvas;
         private Label lblStatus;
+        private PictureBox PicCanvas;
+        private Panel panel1;
     }
 }
