@@ -40,6 +40,7 @@
             btnOpenFile = new Button();
             btnSaveFile = new Button();
             PicCanvas = new PictureBox();
+            lblStatus = new Label();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             groupBox3.SuspendLayout();
@@ -167,6 +168,7 @@
             btnSaveFile.TabIndex = 4;
             btnSaveFile.Text = "저장";
             btnSaveFile.UseVisualStyleBackColor = false;
+            btnSaveFile.Click += btnSaveFile_Click_1;
             // 
             // PicCanvas
             // 
@@ -177,11 +179,21 @@
             PicCanvas.TabIndex = 5;
             PicCanvas.TabStop = false;
             // 
+            // lblStatus
+            // 
+            lblStatus.Font = new Font("한컴 백제 M", 10.8749981F, FontStyle.Bold, GraphicsUnit.Point, 129);
+            lblStatus.ForeColor = Color.Red;
+            lblStatus.Location = new Point(880, 122);
+            lblStatus.Name = "lblStatus";
+            lblStatus.Size = new Size(196, 42);
+            lblStatus.TabIndex = 6;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(14F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1088, 789);
+            Controls.Add(lblStatus);
             Controls.Add(PicCanvas);
             Controls.Add(btnSaveFile);
             Controls.Add(btnOpenFile);
@@ -215,5 +227,6 @@
         private TrackBar trbLineWidth;
         private Button btnSaveFile;
         private PictureBox PicCanvas;
+        private Label lblStatus;
     }
 }

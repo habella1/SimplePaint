@@ -64,6 +64,32 @@
 ![과제3 실행화면](img/screenshot-3.png)
 
 - 구현한 내용 (위 그림 참조)
+  - 현재 그림판에 그려진 이미지를 파일로 저장하는 기능을 구현하였다.
+  - SaveFileDialog를 사용하여 사용자가 저장할 파일의 경로와 이름을 직접 선택할 수 있도록 구현하였다.
+  - 저장 가능한 이미지 형식은 PNG, JPG, BMP 총 3가지로 구성하였다.
+  - 사용자가 선택한 파일 확장자에 따라 적절한 ImageFormat을 설정하여 이미지가 저장되도록 구현하였다.
+  - Bitmap 객체(canvasBitmap)에 저장된 그림 데이터를 Save 메서드를 이용하여 이미지 파일로 저장하였다.
+### 사용된 주요 클래스 및 함수 설명
+- SaveFileDialog 클래스
+  - Windows Forms에서 파일 저장을 위한 UI 대화상자를 제공하는 클래스이다.
+  - ShowDialog() 메서드를 호출하면 사용자에게 저장 창을 표시한다.
+- Bitmap 클래스
+  - 이미지를 메모리에서 관리하는 객체이다.
+  - 현재 그림판에 그려진 모든 그래픽 정보를 저장하고 있는 객체이다.
+  - Save() 메서드를 통해 이미지 파일로 저장할 수 있다.
+- GraphicsFormat (ImageFormat)
+  - 저장할 이미지의 파일 형식을 지정하는 열거형이다.
+  - 지원 형식:
+    - ImageFormat.Png
+    - ImageFormat.Jpeg
+    - ImageFormat.Bmp
+- Bitmap.Save(string filename, ImageFormat format)
+  - Bitmap에 저장된 이미지를 실제 파일로 저장하는 핵심 메서드이다.
+  - 첫 번째 인자는 저장 경로 및 파일 이름이다.
+  - 두 번째 인자는 저장할 이미지 형식이다.
+- EndsWith()
+  - 문자열의 끝이 특정 확장자인지 확인하는 함수이다.
+  - 파일 확장자(.jpg, .png, .bmp)를 판별하여 저장 형식을 결정하는 데 사용된다.
 
 ---
 

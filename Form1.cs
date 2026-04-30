@@ -9,14 +9,14 @@ namespace SimplePaint
     public partial class Form1 : Form
     {
         enum ToolType { Line, Rectangle, Circle } // 사용할 도형 타입
-        
+
         private Bitmap canvasBitmap; // 실제 그림이 저장되는 비트맵
         private Graphics canvasGraphics; // 비트맵 위에 그리기 위한객체
-       
+
         private bool isDrawing = false; // 현재 드래그 중인지 여부
         private Point startPoint; // 드래그 시작점
         private Point endPoint; // 드래그 끝점
-        
+
         private ToolType currentTool = ToolType.Line; // 현재 선택된 도형
         private Color currentColor = Color.Black; // 현재 색상
         private int currentLineWidth = 2; // 현재 선 두께
@@ -80,7 +80,7 @@ namespace SimplePaint
             if (!isDrawing) return; // 그림 그리기와 상관 없는 마우스 움직임은무시
 
             isDrawing = false; // 드래그 종료
-            endPoint = e.Location;  
+            endPoint = e.Location;
 
             // 실제 비트맵에 도형 그리기 (확정)
             using (Pen pen = new Pen(currentColor, currentLineWidth))
@@ -102,7 +102,7 @@ namespace SimplePaint
                 previewPen.DashStyle = DashStyle.Dash;
                 DrawShape(e.Graphics, previewPen, startPoint, endPoint);
             }
-            
+
         }
 
         // 실제로 그림 그리는 함수
@@ -176,10 +176,61 @@ namespace SimplePaint
             currentLineWidth = trbLineWidth.Value;
         }
 
+        // 과제3: 이미지 불러오기 
+        private void btnOpenFile_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "이미지 파일 (*.png;*.jpg;*.bmp)|*.png;*.jpg;*.bmp";
+
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                // 1️⃣ 이미지 파일 → Bitmap으로 읽기
+                canvasBitmap = new Bitmap(ofd.FileName);
+
+                // 2️⃣ ⭐ 이게 핵심 (그림 그릴 준비)
+                canvasGraphics = Graphics.FromImage(canvasBitmap);
+
+                // 3️⃣ PictureBox에 보여주기
+                PicCanvas.Image = canvasBitmap;
+            }
+        }
+
+        // 과제3 : 이미지 저장하기
+        
+
 
         private void lblAppName_Click(object sender, EventArgs e)
         {
 
+        }
+
+        // 과제3 : 이미지 저장하기
+        private void btnSaveFile_Click_1(object sender, EventArgs e)
+        {
+            if (canvasBitmap == null)
+            {
+                lblStatus.Text = "저장할 그림이 없습니다.";
+                return;
+            }
+
+            SaveFileDialog sfd = new SaveFileDialog();
+
+            sfd.Filter = "PNG (*.png)|*.png|JPG (*.jpg)|*.jpg|BMP (*.bmp)|*.bmp";
+            sfd.DefaultExt = "png";
+
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                System.Drawing.Imaging.ImageFormat format = System.Drawing.Imaging.ImageFormat.Png;
+
+                if (sfd.FileName.ToLower().EndsWith(".jpg"))
+                    format = System.Drawing.Imaging.ImageFormat.Jpeg;
+                else if (sfd.FileName.ToLower().EndsWith(".bmp"))
+                    format = System.Drawing.Imaging.ImageFormat.Bmp;
+
+                canvasBitmap.Save(sfd.FileName, format);
+
+                lblStatus.Text = "✔ 저장 완료!";
+            }
         }
     }
 }
